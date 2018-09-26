@@ -1,7 +1,7 @@
 def call(configOverrides) {
 
   def config = [
-     releaseBranch: ['master'],
+     releaseBranch: ['*/master'],
      autoVersionRelease: false 
   ]
 
