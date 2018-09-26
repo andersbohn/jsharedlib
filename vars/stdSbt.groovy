@@ -13,9 +13,7 @@ def call(configOverrides) {
 
   def isReleaseBranch = config.releaseBranch.contains(env.BRANCH_NAME)
 
-  ansiColor('xterm') {
-  	echo "std sbt called with config ${config}"  
-  }
+  echo "std sbt called with config ${config}"  
   
   try {
     node('master') {  
