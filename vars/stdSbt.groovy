@@ -19,6 +19,9 @@ def call(configOverrides) {
   
   try {
     node('master') {  
+    	stage('checkout') {
+    		checkout scm
+    	}
       stage('Build') {
 	    echo "Std Build"
       }
