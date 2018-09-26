@@ -1,1 +1,4 @@
-println "g1"
+def call(body) {
+  echo "g1 called with ${body}" 
+  "g1 result!"
+}
