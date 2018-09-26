@@ -10,10 +10,11 @@ def call(configOverrides) {
   
   configOverrides()
 
+  def branchName = scm.branches[0].name //env.BRANCH_NAME
 
-  def isReleaseBranch = config.releaseBranch.contains(env.BRANCH_NAME)
+  def isReleaseBranch = config.releaseBranch.contains(branchName)
 
-  echo "std sbt called with config ${config} - ${isReleaseBranch} - ${env.BRANCH_NAME}"  
+  echo "std sbt called with config ${config} - ${isReleaseBranch} - ${branchName}"  
   
   try {
     node('master') {  
