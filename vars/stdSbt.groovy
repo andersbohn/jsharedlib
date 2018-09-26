@@ -13,7 +13,7 @@ def call(configOverrides) {
 
   def isReleaseBranch = config.releaseBranch.contains(env.BRANCH_NAME)
 
-  echo "std sbt called with config ${config}"  
+  echo "std sbt called with config ${config} - ${isReleaseBranch} - ${env.BRANCH_NAME}"  
   
   try {
     node('master') {  
