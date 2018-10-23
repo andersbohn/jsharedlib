@@ -75,4 +75,3 @@ def manager = binding.getVariable("manager")
 def link() {
   input(id: "Confirmation", message: 'Add <a href="https://github.com/teralytics/teradata/releases/new?tag=">tag</a> in git then confirm Release')
   //manager.createSummary("warning.gif").appendText("<h1>You have been warned!</h1>", false, false, false, "red") 
-}
