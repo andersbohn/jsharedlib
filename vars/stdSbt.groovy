@@ -36,17 +36,9 @@ def call(configOverrides) {
               sh 'mkdir -p target/releaselink'
               echo "write file"
               def currentVersion = 'v1.0.0'
-              def htmlString = '<html><body>Create release for ' + env.BRANCH_NAME + ' -> <a href="https://github.com/andersbohn/jdemoprj/releases/new?tag='+currentVersion+'">on github release page</a></body></html>'
-              sh 'echo "'+htmlString+'" > target/releaselink/index.html'
-              echo "publish Html "
-              publishHTML target: [
-                          allowMissing:true,
-                          alwaysLinkToLastBuild: false,
-                          keepAll:true,
-                          reportDir: 'target/releaselink',
-                          reportFiles: 'index.html',
-                          reportName: 'ReleaseLink'
-                      ]
+              def htmlString = '<p>Create release for ' + env.BRANCH_NAME + ' -> <a href="https://github.com/andersbohn/jdemoprj/releases/new?tag='+currentVersion+'">on github release page</a></p>'
+              
+              addHtmlBadge html: 'htmlString', id: 'relaselink'
 
             def proceedWithRelease = true
             try { 
