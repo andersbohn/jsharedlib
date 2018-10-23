@@ -36,9 +36,8 @@ def call(configOverrides) {
               sh 'mkdir -p target/releaselink'
               echo "write file"
               def currentVersion = 'v1.0.0'
-              def htmlString = '<p>Create release for ' + env.BRANCH_NAME + ' -> <a href="https://github.com/andersbohn/jdemoprj/releases/new?tag='+currentVersion+'">on github release page</a></p>'
-              
-              addHtmlBadge html: 'htmlString', id: 'relaselink'
+              def htmlString = '<a href="https://github.com/andersbohn/jdemoprj/releases/new?tag='+currentVersion+'">Rel-' + env.BRANCH_NAME + '</a>'              
+              addHtmlBadge html: htmlString, id: 'releaselink'
 
             def proceedWithRelease = true
             try { 
