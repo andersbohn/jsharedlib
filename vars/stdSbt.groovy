@@ -27,7 +27,9 @@ def call(configOverrides) {
       stage('Test') {
         echo "Std Test"	
       }
-      manager.createSummary("document.png").appendText("<a href='"+ pom.url + "'>View Maven Site</a>", false)
+      
+      link() 
+      
       if (isReleaseBranch) {
       	if (!config.autoVersionRelease) {
       		stage("Confirm Release") {
@@ -55,4 +57,8 @@ def call(configOverrides) {
 	  echo "Std Clean After error"	
     }
   } 
+}
+
+def link() {
+   manager.createSummary("warning.gif").appendText("<h1>You have been warned!</h1>", false, false, false, "red") 
 }
