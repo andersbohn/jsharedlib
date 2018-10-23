@@ -25,21 +25,31 @@ def call(configOverrides) {
 	      echo "Std Build"
       }
       stage('Test') {
-        echo "Std Test + link" 	
-        link() 
+        echo "Std Test" 	
       }
       
 
       if (isReleaseBranch) {
       	if (!config.autoVersionRelease) {
       		stage("Confirm Release") {
-      			milestone()
-      			input(id: "Confirmation", message: "Confirm Release")
-      			milestone()
+            def proceedWithRelease = true
+            try { 
+      			  milestone()
+      			  input(id: "Confirmation", message: "Confirm Release")
+      			  milestone()
+            } catch(e) {
+              proceedWithRelease = false
+            }
+            if (proceedWithRelease) {
+              stage("Release") {
+                echo "Released by confirmation"
+              }
+            }
       		}
-      	}
-      	stage("Release") {
-          echo "Auto Released"
+      	} else {
+      	  stage("Release") {
+            echo "Auto Released"
+          }
         }
 
       } else {
