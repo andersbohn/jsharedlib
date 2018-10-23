@@ -22,11 +22,12 @@ def call(configOverrides) {
     		checkout scm
     	}
       stage('Build') {
-	    echo "Std Build"
+	      echo "Std Build"
       }
       stage('Test') {
         echo "Std Test"	
       }
+      manager.createSummary("document.png").appendText("<a href='"+ pom.url + "'>View Maven Site</a>", false)
       if (isReleaseBranch) {
       	if (!config.autoVersionRelease) {
       		stage("Confirm Release") {
@@ -36,16 +37,16 @@ def call(configOverrides) {
       		}
       	}
       	stage("Release") {
-            echo "Auto Released"
+          echo "Auto Released"
         }
 
       } else {
       	stage("Publish") {
-		  echo "Std Publish"	
+		      echo "Std Publish"	
       	}
       }
       stage("Clean") {
-		echo "Std Clean"	
+	     	echo "Std Clean"	
       }
     }
   } catch(err) {
