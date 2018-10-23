@@ -32,6 +32,22 @@ def call(configOverrides) {
       if (isReleaseBranch) {
       	if (!config.autoVersionRelease) {
       		stage("Confirm Release") {
+              echo "mkdir"
+              sh 'mkdir -p target/releaselink'
+              echo "write file"
+              def currentVersion = 'v1.0.0'
+              def htmlString = '<html><body>Create release for ' + env.BRANCH_NAME + ' -> <a href="https://github.com/andersbohn/jdemoprj/releases/new?tag='+currentVersion+'"</body></html>'
+              sh 'echo "'+htmlString+'" > target/releaselink/index.html'
+              echo "publish Html "
+              publishHTML target: [
+                          allowMissing:true,
+                          alwaysLinkToLastBuild: false,
+                          keepAll:true,
+                          reportDir: 'target/releaselink',
+                          reportFiles: 'index.html',
+                          reportName: 'ReleaseLink'
+                      ]
+
             def proceedWithRelease = true
             try { 
       			  milestone()
@@ -74,6 +90,6 @@ def binding = getBinding()
 def manager = binding.getVariable("manager")
 
 def link() {
-  input(id: 'Confirmation <a href="https://github.com/teralytics/teradata/releases/new?tag=">tag</a>', message: 'Add <a href="https://github.com/teralytics/teradata/releases/new?tag=">tag</a> in git then confirm Release')
+  input(id: 'Confirmation', message: 'Add tag in git then confirm Release')
   //manager.createSummary("warning.gif").appendText("<h1>You have been warned!</h1>", false, false, false, "red") 
 }
