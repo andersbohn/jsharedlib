@@ -59,6 +59,9 @@ def call(configOverrides) {
   } 
 }
 
+def binding = getBinding()
+def manager = binding.getVariable("manager")
+
 def link() {
    manager.createSummary("warning.gif").appendText("<h1>You have been warned!</h1>", false, false, false, "red") 
 }
