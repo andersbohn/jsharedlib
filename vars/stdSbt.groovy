@@ -25,11 +25,11 @@ def call(configOverrides) {
 	      echo "Std Build"
       }
       stage('Test') {
-        echo "Std Test"	
+        echo "Std Test + link" 	
+        link() 
       }
       
-      link() 
-      
+
       if (isReleaseBranch) {
       	if (!config.autoVersionRelease) {
       		stage("Confirm Release") {
