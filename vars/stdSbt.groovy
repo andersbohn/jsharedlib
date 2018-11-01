@@ -15,6 +15,20 @@ def call(configOverrides) {
   def isReleaseBranch = config.releaseBranch.contains(branchName)
 
   echo "std sbt called with config ${config} - ${isReleaseBranch} - ${branchName}"  
+
+  echo "ENV -> "
+  sh 'env > env.txt' 
+  for (String i : readFile('env.txt').split("\r?\n")) {
+    println i
+  }
+  echo "params -> "
+  for (String i : params) {
+    println i
+  }
+  echo "currentBuild.buildVariables -> "
+  for (String i : currentBuild.buildVariables) {
+    println i
+  }
   
   try {
     node('master') {  
@@ -84,3 +98,4 @@ def link() {
   input(id: 'Confirmation', message: 'Add tag in git then confirm Release')
   //manager.createSummary("warning.gif").appendText("<h1>You have been warned!</h1>", false, false, false, "red") 
 }
+
