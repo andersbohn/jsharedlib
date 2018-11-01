@@ -19,25 +19,14 @@ def call(configOverrides) {
   try {
     node('master') {  
     	stage('checkout') {
-    		checkout scm
+    		def gitparams = checkout scm
+        echo "scm " + gitparams
+        for (String i : gitparams) {
+          println i
+        }
     	}
       stage('Build') {
 	      echo "Std Build"
-
-  echo "ENV -> "
-  sh 'env > env.txt' 
-  for (String i : readFile('env.txt').split("\r?\n")) {
-    println i
-  }
-  echo "params -> "
-  for (String i : params) {
-    println i
-  }
-  echo "currentBuild.buildVariables -> "
-  for (String i : currentBuild.buildVariables) {
-    println i
-  }
-  
 
       }
       stage('Test') {
