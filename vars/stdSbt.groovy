@@ -39,12 +39,14 @@ def call(configOverrides) {
       		stage("Confirm Release") {
               echo "mkdir"
               sh 'mkdir -p target/releaselink'
-              echo "write file"
+              def giturl = scm.GIT_URL
+              echo "write file - " + giturl
+
               def currentVersion = 'v1.0.0'
               def htmlString = '<a href="https://github.com/andersbohn/jdemoprj/releases/new?tag='+currentVersion+'">Rel-' + env.BRANCH_NAME + '</a>'              
               addHtmlBadge html: htmlString, id: 'releaselink'
 
-            def proceedWithRelease = true
+            /*def proceedWithRelease = true
             try { 
       			  milestone()
               link()
@@ -57,7 +59,7 @@ def call(configOverrides) {
               stage("Release") {
                 echo "Released by confirmation"
               }
-            }
+            }*/
       		}
       	} else {
       	  stage("Release") {
