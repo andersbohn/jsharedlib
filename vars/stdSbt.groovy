@@ -16,6 +16,14 @@ def call(configOverrides) {
 
   echo "std sbt called with config ${config} - ${isReleaseBranch} - ${branchName}"  
 
+  try {
+    node('master') {  
+    	stage('checkout') {
+    		checkout scm
+    	}
+      stage('Build') {
+	      echo "Std Build"
+
   echo "ENV -> "
   sh 'env > env.txt' 
   for (String i : readFile('env.txt').split("\r?\n")) {
@@ -30,13 +38,7 @@ def call(configOverrides) {
     println i
   }
   
-  try {
-    node('master') {  
-    	stage('checkout') {
-    		checkout scm
-    	}
-      stage('Build') {
-	      echo "Std Build"
+
       }
       stage('Test') {
         echo "Std Test" 	
