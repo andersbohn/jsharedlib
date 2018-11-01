@@ -19,11 +19,8 @@ def call(configOverrides) {
   try {
     node('master') {  
     	stage('checkout') {
-    		def gitparams = checkout scm
-        echo "scm " + gitparams
-        for (String i : gitparams) {
-          println i
-        }
+    		scmResult = checkout scm
+        echo "scm " + scmResult
     	}
       stage('Build') {
 	      echo "Std Build"
@@ -38,9 +35,9 @@ def call(configOverrides) {
       	if (!config.autoVersionRelease) {
       		stage("Confirm Release") {
               echo "mkdir"
-              sh 'mkdir -p target/releaselink'
-              def giturl = scm.GIT_URL
-              echo "write file - " + giturl
+              
+              
+              echo "write file - " + scmResult.GIT_URL
 
               def currentVersion = 'v1.0.0'
               def htmlString = '<a href="https://github.com/andersbohn/jdemoprj/releases/new?tag='+currentVersion+'">Rel-' + env.BRANCH_NAME + '</a>'              
