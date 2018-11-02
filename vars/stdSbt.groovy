@@ -44,7 +44,7 @@ def call(configOverrides) {
               addHtmlBadge html: htmlString, id: 'releaselink'
 
               echo "version link - " + currentVersion 
-              def versionHtml = '<a href="javascript:document.execCommand(\'copy\');return false" onclick="javascript:document.execCommand(\'copy\');">' + currentVersion + '</a>'
+              def versionHtml = '<a href="xxx" onclick="javascript:document.execCommand(\'copy\');">' + currentVersion + '</a>'
               addHtmlBadge html: versionHtml, id: 'versionlink'
             /*def proceedWithRelease = true
             try { 
