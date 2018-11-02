@@ -58,7 +58,7 @@ def call(configOverrides) {
                       ]
 
               echo "version link - " + currentVersion 
-              def versionHtml = '<a href="target/buildsummary/index.html">' + currentVersion + '</p>'
+              def versionHtml = '<a href="'+ env.BUILD_NUMBER + '/BuildSummary">' + currentVersion + '</p>'
               addHtmlBadge html: versionHtml, id: 'versionlink'
 
             /*def proceedWithRelease = true
