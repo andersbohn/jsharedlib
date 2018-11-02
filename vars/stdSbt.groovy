@@ -50,7 +50,7 @@ def call(configOverrides) {
               def summary = createSummary("green.gif")
               summary.appendText(htmlString, false)  
               summary.appendText(versionHtml, false)
-              summary.appendText('<a href="javascript:document.execCommand('copy');return false;">xyz</a>', false)
+              summary.appendText('<a href="javascript:document.execCommand(\'copy\');return false;">xyz</a>', false)
             /*def proceedWithRelease = true
             try { 
       			  milestone()
