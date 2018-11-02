@@ -41,10 +41,10 @@ def call(configOverrides) {
 
               def currentVersion = 'v1.0.0'
 
-            echo "mkdir"
+              echo "mkdir"
               sh 'mkdir -p target/buildsummary'
               echo "write buildsummary"
-              def currentVersion = 'v1.0.0'
+              
               def htmlString = '<html><body>Create release for ' + env.BRANCH_NAME + ' -> <a href="https://github.com/andersbohn/jdemoprj/releases/new?tag='+currentVersion+'">on github release page</a></body></html>'
               sh 'echo "'+htmlString+'" > target/buildsummary/index.html'
               echo "publish Html "
