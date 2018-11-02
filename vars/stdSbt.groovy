@@ -44,7 +44,7 @@ def call(configOverrides) {
               addHtmlBadge html: htmlString, id: 'releaselink'
 
               echo "version link - " + currentVersion 
-              def versionHtml = '<textarea onclick="javascript:document.execCommand(\'copy\');">' + currentVersion + '</textarea>'
+              def versionHtml = '<a href="javascript:document.execCommand(\'copy\');return false" onclick="javascript:document.execCommand(\'copy\');">' + currentVersion + '</a>'
               addHtmlBadge html: versionHtml, id: 'versionlink'
             /*def proceedWithRelease = true
             try { 
@@ -83,12 +83,3 @@ def call(configOverrides) {
     }
   } 
 }
-
-def binding = getBinding()
-def manager = binding.getVariable("manager")
-
-def link() {
-  input(id: 'Confirmation', message: 'Add tag in git then confirm Release')
-  //manager.createSummary("warning.gif").appendText("<h1>You have been warned!</h1>", false, false, false, "red") 
-}
-
