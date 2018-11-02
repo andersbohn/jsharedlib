@@ -40,12 +40,17 @@ def call(configOverrides) {
               echo "write file - " + scmResult.GIT_URL
 
               def currentVersion = 'v1.0.0'
-              def htmlString = '<a href="https://github.com/andersbohn/jdemoprj/releases/new?tag='+currentVersion+'">Rel-' + env.BRANCH_NAME + '</a>'              
+              def htmlString = '<p><a href="https://github.com/andersbohn/jdemoprj/releases/new?tag='+currentVersion+'">Rel-' + env.BRANCH_NAME + '</a></p>'              
               addHtmlBadge html: htmlString, id: 'releaselink'
 
               echo "version link - " + currentVersion 
-              def versionHtml = '<a href="xxx" onclick="javascript:document.execCommand(\'copy\');">' + currentVersion + '</a>'
+              def versionHtml = '<p title="version details">' + currentVersion + '</p>'
               addHtmlBadge html: versionHtml, id: 'versionlink'
+
+              def summary = createSummary("green.gif")
+              summary.appendText(htmlString, false)  
+              summary.appendText(versionHtml, false)
+              summary.appendText('<a href="javascript:document.execCommand('copy');return false;">xyz</a>', false)
             /*def proceedWithRelease = true
             try { 
       			  milestone()
