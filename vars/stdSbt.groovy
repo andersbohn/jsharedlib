@@ -34,14 +34,18 @@ def call(configOverrides) {
       if (isReleaseBranch) {
       	if (!config.autoVersionRelease) {
       		stage("Confirm Release") {
+              echo "mkdir"
               
-              def githubUrl = scmResult.GIT_URL.replace(".git", "")
-              echo "write file - " + scmResult.GIT_URL + " -> " + githubUrl
+              
+              echo "write file - " + scmResult.GIT_URL
 
               def currentVersion = 'v1.0.0'
-              def htmlString = '<a href="'+githubUrl+'/releases/new?tag='+currentVersion+'">Rel-' + env.BRANCH_NAME + '</a>'              
+              def htmlString = '<a href="https://github.com/andersbohn/jdemoprj/releases/new?tag='+currentVersion+'">Rel-' + env.BRANCH_NAME + '</a>'              
               addHtmlBadge html: htmlString, id: 'releaselink'
 
+              echo "version link - " + currentVersion 
+              def versionHtml = '<textarea onclick="javascript:document.execCommand(\'copy\');">' + currentVersion + '</textarea>'
+              addHtmlBadge html: versionHtml, id: 'versionlink'
             /*def proceedWithRelease = true
             try { 
       			  milestone()
@@ -79,3 +83,12 @@ def call(configOverrides) {
     }
   } 
 }
+
+def binding = getBinding()
+def manager = binding.getVariable("manager")
+
+def link() {
+  input(id: 'Confirmation', message: 'Add tag in git then confirm Release')
+  //manager.createSummary("warning.gif").appendText("<h1>You have been warned!</h1>", false, false, false, "red") 
+}
+
