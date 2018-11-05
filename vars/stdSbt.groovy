@@ -63,7 +63,7 @@ def call(configOverrides) {
                                 'console.log(\'test\');' +
                                 '</script>'
 //                        addHtmlBadge html: versionHtml, id: 'versionlink'
-                        currentBuild.description = 'R' + currentVersion
+                        currentBuild.description = versionHtml // 'R' + currentVersion
 
                         /*def proceedWithRelease = true
                         try {
